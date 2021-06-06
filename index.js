@@ -95,8 +95,6 @@ async function viewAllRoles() {
 }
 
 
-
-
 process.on("exit", async function(code) {
     await db.close();
     return console.log(`About to exit with code ${code}`);
