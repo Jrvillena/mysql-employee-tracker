@@ -299,7 +299,41 @@ async function mainPrompt() {
             }
         ])
 }
-
+async function getAddEmployeeInfo() {
+    const managers = await getManagerNames();
+    const roles = await getRoles();
+    return inquirer
+        .prompt([
+            {
+                type: "input",
+                name: "first_name",
+                message: "What is the employee's first name?"
+            },
+            {
+                type: "input",
+                name: "last_name",
+                message: "What is the employee's last name?"
+            },
+            {
+                type: "list",
+                message: "What is the employee's role?",
+                name: "role",
+                choices: [
+                    // populate from db
+                    ...roles
+                ]
+            },
+            {
+                type: "list",
+                message: "Who is the employee's manager?",
+                name: "manager",
+                choices: [
+                    // populate from db
+                    ...managers
+                ]
+            }
+        ])
+}
 
 process.on("exit", async function(code) {
     await db.close();
